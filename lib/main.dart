@@ -49,10 +49,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  int _num = 0;
-  String _text = '';
-  String _result = '';
-  int _gValue = 1;
+  final _tab = <Tab> [
+    Tab( text: "1 Number" ),
+    Tab( text: "2 Numbers"),
+    Tab( text: "3 Numbers"),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -62,120 +63,335 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Container(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        padding: EdgeInsets.all(64),
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            TextField(
-              decoration: new InputDecoration(labelText: "Number"),
-              keyboardType: TextInputType.number,
-              onChanged: (String value) {
-                setState(() {
-                  _text = value;
-                  _num = int.parse(_text);
-                });
-              },
-            ),
-            RadioListTile(
-              title: Text('Check if this is prime or not'),
-              value: 1,
-              groupValue: _gValue,
-              onChanged: (value) => _onRadioSelected(value),
-            ),
-            RadioListTile(
-              title: Text('Get divisors of this'),
-              value: 2,
-              groupValue: _gValue,
-              onChanged: (value) => _onRadioSelected(value),
-            ),
-            RadioListTile(
-              title: Text('Prime factorize this'),
-              value: 3,
-              groupValue: _gValue,
-              onChanged: (value) => _onRadioSelected(value),
-            ),
-            RadioListTile(
-              title: Text('Calculate the factorial of this'),
-              value: 4,
-              groupValue: _gValue,
-              onChanged: (value) => _onRadioSelected(value),
-            ),
-            /* ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  _result = "";
-                });
-              },
-              child: Text('Clear'),
-            ), */
-            const Divider(
-              height: 20,
-              thickness: 1,
-              indent: 0,
-              endIndent: 0,
-              color: Colors.black,
-            ),
-            Text(
-              '$_result',
-              style: TextStyle(fontSize: 24),
-            ),
+    return DefaultTabController(
+      length: _tab.length,
+      child: Scaffold(
+        appBar: AppBar(
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          title: Text(widget.title),
+          bottom: TabBar(
+            tabs: _tab,
+          ),
+        ),
+        body: TabBarView(
+          children: <Widget> [
+            TabPage(ttl: "1 Number"),
+            TabPage(ttl: "2 Numbers"),
+            TabPage(ttl: "3 Numbers"),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            switch (_gValue) {
-              case 1:
-                _result = PrimeOrNot(_num);
-                break;
-              case 2:
-                _result = GetDivisors(_num);
-                break;
-              case 3:
-                _result = PrimeFactorization(_num);
-                break;
-              case 4:
-                _result = GetFactorial(_num);
-                break;
-              default:
-                // do nothing
-            }
-          });
-        },
-        child: const Icon(Icons.arrow_forward),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+
   }
+
+}
+
+class TabPage extends StatefulWidget {
+  const TabPage({Key? key, required this.ttl}) : super(key: key);
+
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+
+  // This class is the configuration for the state. It holds the values (in this
+  // case the title) provided by the parent (in this case the App widget) and
+  // used by the build method of the State. Fields in a Widget subclass are
+  // always marked "final".
+
+  final String ttl;
+
+  @override
+  State<TabPage> createState() => _TabPageState();
+}
+
+class _TabPageState extends State<TabPage> {
+  //final String? title;
+
+  int _num = 0;
+  int _num2 = 0;
+  int _num3 = 0;
+  int _gValue = 1;
+  int _gValue1 = 11;
+  int _gValue2 = 21;
+  String _text = '';
+  String _text2 = '';
+  String _text3 = '';
+  String _result = '';
 
   _onRadioSelected(value) {
     setState(() {
       _gValue = value;
     });
   }
+
+  _onRadioSelected1(value) {
+    setState(() {
+      _gValue1 = value;
+    });
+  }
+
+  _onRadioSelected2(value) {
+    setState(() {
+      _gValue2 = value;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    switch (widget.ttl) {
+      case "1 Number":
+        return Container(
+          padding: EdgeInsets.all(64),
+          child: Column(
+              // Column is also a layout widget. It takes a list of children and
+              // arranges them vertically. By default, it sizes itself to fit its
+              // children horizontally, and tries to be as tall as its parent.
+              //
+              // Invoke "debug painting" (press "p" in the console, choose the
+              // "Toggle Debug Paint" action from the Flutter Inspector in Android
+              // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
+              // to see the wireframe for each widget.
+              //
+              // Column has various properties to control how it sizes itself and
+              // how it positions its children. Here we use mainAxisAlignment to
+              // center the children vertically; the main axis here is the vertical
+              // axis because Columns are vertical (the cross axis would be
+              // horizontal).
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              TextField(
+                decoration: new InputDecoration(labelText: "Number"),
+                keyboardType: TextInputType.number,
+                onChanged: (String value) {
+                  setState(() {
+                    _text = value;
+                    _num = int.parse(_text);
+                  });
+                },
+              ),
+              RadioListTile(
+                title: Text('Check if this is prime or not'),
+                value: 1,
+                groupValue: _gValue,
+                onChanged: (value) => _onRadioSelected(value),
+              ),
+              RadioListTile(
+                title: Text('Get divisors of this'),
+                value: 2,
+                groupValue: _gValue,
+                onChanged: (value) => _onRadioSelected(value),
+              ),
+              RadioListTile(
+                title: Text('Prime factorize this'),
+                value: 3,
+                groupValue: _gValue,
+                onChanged: (value) => _onRadioSelected(value),
+              ),
+              RadioListTile(
+                title: Text('Calculate the factorial of this'),
+                value: 4,
+                groupValue: _gValue,
+                onChanged: (value) => _onRadioSelected(value),
+              ),
+              const Divider(
+                height: 20,
+                thickness: 1,
+                indent: 0,
+                endIndent: 0,
+                color: Colors.black,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    switch(_gValue) {
+                      case 1:
+                        _result = PrimeOrNot(_num);
+                        break;
+                      case 2:
+                        _result = GetDivisors(_num);
+                        break;
+                      case 3:
+                        _result = PrimeFactorization(_num);
+                        break;
+                      case 4:
+                        _result = GetFactorial(_num);
+                        break;
+                      default:
+                        // do nothing
+                    }
+                  });
+                },
+                child: Text('Go!'),
+              ),
+              const Divider(
+                height: 20,
+                thickness: 1,
+                indent: 0,
+                endIndent: 0,
+                color: Colors.black,
+              ),
+              Text(
+                '$_result',
+                style: TextStyle(fontSize: 24),
+              ),
+            ],
+          ),
+        );
+        break;
+      case "2 Numbers":
+        return Container(
+          padding: EdgeInsets.all(64),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              TextField(
+                decoration: new InputDecoration(labelText: "Number 1"),
+                keyboardType: TextInputType.number,
+                onChanged: (String value) {
+                  setState(() {
+                    _text = value;
+                    _num = int.parse(_text);
+                  });
+                },
+              ),
+              TextField(
+                decoration: new InputDecoration(labelText: "Number 2"),
+                keyboardType: TextInputType.number,
+                onChanged: (String value) {
+                  setState(() {
+                    _text2 = value;
+                    _num2 = int.parse(_text2);
+                  });
+                },
+              ),
+              RadioListTile(
+                title: Text('Get their greatest common divisor'),
+                value: 11,
+                groupValue: _gValue1,
+                onChanged: (value) => _onRadioSelected1(value),
+              ),
+              RadioListTile(
+                title: Text('Get their least common multiple'),
+                value: 12,
+                groupValue: _gValue1,
+                onChanged: (value) => _onRadioSelected1(value),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    switch(_gValue1) {
+                      case 11:
+                        _result = GetGCD(_num, _num2, 0);
+                        break;
+                      case 12:
+                        _result = GetLCM(_num, _num2, 0);
+                        break;
+                      default:
+                      // do nothing
+                    }
+                  });
+                },
+                child: Text('Go!'),
+              ),
+              const Divider(
+                height: 20,
+                thickness: 1,
+                indent: 0,
+                endIndent: 0,
+                color: Colors.black,
+              ),
+              Text(
+                '$_result',
+                style: TextStyle(fontSize: 24),
+              ),
+            ],
+          ),
+        );
+        break;
+      default:
+        return Container(
+          padding: EdgeInsets.all(64),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: <Widget>[
+              TextField(
+                decoration: new InputDecoration(labelText: "Number 1"),
+                keyboardType: TextInputType.number,
+                onChanged: (String value) {
+                  setState(() {
+                    _text = value;
+                    _num = int.parse(_text);
+                  });
+                },
+              ),
+              TextField(
+                decoration: new InputDecoration(labelText: "Number 2"),
+                keyboardType: TextInputType.number,
+                onChanged: (String value) {
+                  setState(() {
+                    _text2 = value;
+                    _num2 = int.parse(_text2);
+                  });
+                },
+              ),
+              TextField(
+                decoration: new InputDecoration(labelText: "Number 3"),
+                keyboardType: TextInputType.number,
+                onChanged: (String value) {
+                  setState(() {
+                    _text3 = value;
+                    _num3 = int.parse(_text3);
+                  });
+                },
+              ),
+              RadioListTile(
+                title: Text('Get their greatest common divisor'),
+                value: 21,
+                groupValue: _gValue2,
+                onChanged: (value) => _onRadioSelected2(value),
+              ),
+              RadioListTile(
+                title: Text('Get their least common multiple'),
+                value: 22,
+                groupValue: _gValue2,
+                onChanged: (value) => _onRadioSelected2(value),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    switch(_gValue2) {
+                      case 21:
+                        _result = GetGCD(_num, _num2, _num3);
+                        break;
+                      case 22:
+                        _result = GetLCM(_num, _num2, _num3);
+                        break;
+                      default:
+                      // do nothing
+                    }
+                  });
+                },
+                child: Text('Go!'),
+              ),
+              const Divider(
+                height: 20,
+                thickness: 1,
+                indent: 0,
+                endIndent: 0,
+                color: Colors.black,
+              ),
+              Text(
+                '$_result',
+                style: TextStyle(fontSize: 24),
+              ),
+            ],
+          ),
+        );
+    }
+  }
+
 }
 
 String PrimeOrNot(int n) {
@@ -262,4 +478,79 @@ String GetFactorial(int n) {
   }
   str = "$n! = $val";
   return(str);
+}
+
+String GetGCD(int a, int b, int c) {
+  String str = '';
+  int n;
+  int i;
+  int gcd = 0;
+  if(a == 0 || b == 0) {
+    str = "Invalid number.";
+    return(str);
+  }
+  if(c == 0) {
+    str = "GCD($a, $b) = ";
+    n = (a <= b) ? a : b;
+    for (i = 1; i <= n; i++){
+      if(a % i == 0 && b % i == 0) {
+        gcd = i;
+      }
+    }
+  } else {
+    str = "GCD($a, $b, $c) = ";
+    n = a;
+    if (n > b) {
+      n = b;
+    }
+    if (n > c) {
+      n = c;
+    }
+    for (i = 1; i <= n; i++){
+      if(a % i == 0 && b % i == 0 && c % i == 0) {
+        gcd = i;
+      }
+    }
+  }
+  str += "$gcd";
+  return (str);
+}
+
+String GetLCM(int a, int b, int c) {
+  String str = '';
+  int n;
+  int i;
+  int lcm = 0;
+  int maxLCM;
+  if(a == 0 || b == 0) {
+    str = "Invalid number.";
+    return(str);
+  }
+  if(c == 0) {
+    str = "LCM($a, $b) = ";
+    n = (a > b) ? a : b;
+    maxLCM = a * b;
+    for(i = maxLCM; i >= n; i--) {
+      if(i % a == 0 && i % b == 0) {
+        lcm = i;
+      }
+    }
+  } else {
+    str = "LCM($a, $b, $c) = ";
+    n = a;
+    if (n < b) {
+      n = b;
+    }
+    if (n < c) {
+      n = c;
+    }
+    maxLCM = a * b * c;
+    for(i = maxLCM; i >= n; i--) {
+      if(i % a == 0 && i % b == 0 && i % c == 0) {
+        lcm = i;
+      }
+    }
+  }
+  str += "$lcm";
+  return (str);
 }
