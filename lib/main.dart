@@ -142,7 +142,7 @@ class _TabPageState extends State<TabPage> {
   Widget build(BuildContext context) {
     switch (widget.ttl) {
       case "1 Number":
-        return Container(
+        return SingleChildScrollView(
           padding: EdgeInsets.all(64),
           child: Column(
               // Column is also a layout widget. It takes a list of children and
@@ -159,48 +159,56 @@ class _TabPageState extends State<TabPage> {
               // center the children vertically; the main axis here is the vertical
               // axis because Columns are vertical (the cross axis would be
               // horizontal).
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextField(
-                decoration: new InputDecoration(labelText: "Number"),
-                keyboardType: TextInputType.number,
-                onChanged: (String value) {
-                  setState(() {
-                    _text = value;
-                    _num = int.parse(_text);
-                  });
-                },
+              SizedBox(
+                width: 180,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    TextField(
+                      decoration: new InputDecoration(labelText: "Number"),
+                      keyboardType: TextInputType.number,
+                      onChanged: (String value) {
+                        setState(() {
+                          _text = value;
+                          _num = int.parse(_text);
+                        });
+                      },
+                    ),
+                  ],
+                ),
               ),
-              RadioListTile(
-                title: Text('Check if this is prime or not'),
-                value: 1,
-                groupValue: _gValue,
-                onChanged: (value) => _onRadioSelected(value),
-              ),
-              RadioListTile(
-                title: Text('Get divisors of this'),
-                value: 2,
-                groupValue: _gValue,
-                onChanged: (value) => _onRadioSelected(value),
-              ),
-              RadioListTile(
-                title: Text('Prime factorize this'),
-                value: 3,
-                groupValue: _gValue,
-                onChanged: (value) => _onRadioSelected(value),
-              ),
-              RadioListTile(
-                title: Text('Calculate the factorial of this'),
-                value: 4,
-                groupValue: _gValue,
-                onChanged: (value) => _onRadioSelected(value),
-              ),
-              const Divider(
-                height: 20,
-                thickness: 1,
-                indent: 0,
-                endIndent: 0,
-                color: Colors.black,
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget> [
+                    RadioListTile(
+                      title: Text('Check if this is prime or not'),
+                      value: 1,
+                      groupValue: _gValue,
+                      onChanged: (value) => _onRadioSelected(value),
+                    ),
+                    RadioListTile(
+                      title: Text('Get divisors of this'),
+                      value: 2,
+                      groupValue: _gValue,
+                      onChanged: (value) => _onRadioSelected(value),
+                    ),
+                    RadioListTile(
+                      title: Text('Prime factorize this'),
+                      value: 3,
+                      groupValue: _gValue,
+                      onChanged: (value) => _onRadioSelected(value),
+                    ),
+                    RadioListTile(
+                      title: Text('Calculate the factorial of this'),
+                      value: 4,
+                      groupValue: _gValue,
+                      onChanged: (value) => _onRadioSelected(value),
+                    ),
+                  ],
+                ),
               ),
               ElevatedButton(
                 onPressed: () {
@@ -241,43 +249,59 @@ class _TabPageState extends State<TabPage> {
         );
         break;
       case "2 Numbers":
-        return Container(
+        return SingleChildScrollView(
           padding: EdgeInsets.all(64),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextField(
-                decoration: new InputDecoration(labelText: "Number 1"),
-                keyboardType: TextInputType.number,
-                onChanged: (String value) {
-                  setState(() {
-                    _text = value;
-                    _num = int.parse(_text);
-                  });
-                },
+              SizedBox(
+                width: 180,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    TextField(
+                      decoration: new InputDecoration(labelText: "Number 1"),
+                      keyboardType: TextInputType.number,
+                      onChanged: (String value) {
+                        setState(() {
+                          _text = value;
+                          _num = int.parse(_text);
+                        });
+                      },
+                    ),
+                    TextField(
+                      decoration: new InputDecoration(labelText: "Number 2"),
+                      keyboardType: TextInputType.number,
+                      onChanged: (String value) {
+                        setState(() {
+                          _text2 = value;
+                          _num2 = int.parse(_text2);
+                        });
+                      },
+                    ),
+                  ],
+                ),
               ),
-              TextField(
-                decoration: new InputDecoration(labelText: "Number 2"),
-                keyboardType: TextInputType.number,
-                onChanged: (String value) {
-                  setState(() {
-                    _text2 = value;
-                    _num2 = int.parse(_text2);
-                  });
-                },
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    RadioListTile(
+                      title: Text('Get their greatest common divisor'),
+                      value: 11,
+                      groupValue: _gValue1,
+                      onChanged: (value) => _onRadioSelected1(value),
+                    ),
+                    RadioListTile(
+                      title: Text('Get their least common multiple'),
+                      value: 12,
+                      groupValue: _gValue1,
+                      onChanged: (value) => _onRadioSelected1(value),
+                    ),
+                  ],
+                ),
               ),
-              RadioListTile(
-                title: Text('Get their greatest common divisor'),
-                value: 11,
-                groupValue: _gValue1,
-                onChanged: (value) => _onRadioSelected1(value),
-              ),
-              RadioListTile(
-                title: Text('Get their least common multiple'),
-                value: 12,
-                groupValue: _gValue1,
-                onChanged: (value) => _onRadioSelected1(value),
-              ),
+
               ElevatedButton(
                 onPressed: () {
                   setState(() {
@@ -311,53 +335,69 @@ class _TabPageState extends State<TabPage> {
         );
         break;
       default:
-        return Container(
+        return SingleChildScrollView(
           padding: EdgeInsets.all(64),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextField(
-                decoration: new InputDecoration(labelText: "Number 1"),
-                keyboardType: TextInputType.number,
-                onChanged: (String value) {
-                  setState(() {
-                    _text = value;
-                    _num = int.parse(_text);
-                  });
-                },
+              SizedBox(
+                width: 180,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    TextField(
+                      decoration: new InputDecoration(labelText: "Number 1"),
+                      keyboardType: TextInputType.number,
+                      onChanged: (String value) {
+                        setState(() {
+                          _text = value;
+                          _num = int.parse(_text);
+                        });
+                      },
+                    ),
+                    TextField(
+                      decoration: new InputDecoration(labelText: "Number 2"),
+                      keyboardType: TextInputType.number,
+                      onChanged: (String value) {
+                        setState(() {
+                          _text2 = value;
+                          _num2 = int.parse(_text2);
+                        });
+                      },
+                    ),
+                    TextField(
+                      decoration: new InputDecoration(labelText: "Number 3"),
+                      keyboardType: TextInputType.number,
+                      onChanged: (String value) {
+                        setState(() {
+                          _text3 = value;
+                          _num3 = int.parse(_text3);
+                        });
+                      },
+                    ),
+                  ],
+                ),
               ),
-              TextField(
-                decoration: new InputDecoration(labelText: "Number 2"),
-                keyboardType: TextInputType.number,
-                onChanged: (String value) {
-                  setState(() {
-                    _text2 = value;
-                    _num2 = int.parse(_text2);
-                  });
-                },
+              Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    RadioListTile(
+                      title: Text('Get their greatest common divisor'),
+                      value: 21,
+                      groupValue: _gValue2,
+                      onChanged: (value) => _onRadioSelected2(value),
+                    ),
+                    RadioListTile(
+                      title: Text('Get their least common multiple'),
+                      value: 22,
+                      groupValue: _gValue2,
+                      onChanged: (value) => _onRadioSelected2(value),
+                    ),
+                  ]
+                ),
               ),
-              TextField(
-                decoration: new InputDecoration(labelText: "Number 3"),
-                keyboardType: TextInputType.number,
-                onChanged: (String value) {
-                  setState(() {
-                    _text3 = value;
-                    _num3 = int.parse(_text3);
-                  });
-                },
-              ),
-              RadioListTile(
-                title: Text('Get their greatest common divisor'),
-                value: 21,
-                groupValue: _gValue2,
-                onChanged: (value) => _onRadioSelected2(value),
-              ),
-              RadioListTile(
-                title: Text('Get their least common multiple'),
-                value: 22,
-                groupValue: _gValue2,
-                onChanged: (value) => _onRadioSelected2(value),
-              ),
+
               ElevatedButton(
                 onPressed: () {
                   setState(() {
