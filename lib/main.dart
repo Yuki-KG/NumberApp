@@ -215,16 +215,88 @@ class _TabPageState extends State<TabPage> {
                   setState(() {
                     switch(_gValue) {
                       case 1:
-                        _result = PrimeOrNot(_num);
+                        if(_num < 1) {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (_) {
+                              return AlertDialog(
+                                title: Text('Invalid number'),
+                                content: Text('Number must be positive.'),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: Text('OK'),
+                                    onPressed: () => Navigator.of(context).pop(0),
+                                  ),
+                                ],
+                              );
+                            });
+                        } else {
+                          _result = PrimeOrNot(_num);
+                        }
                         break;
                       case 2:
-                        _result = GetDivisors(_num);
+                        if(_num < 1) {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (_) {
+                              return AlertDialog(
+                                title: Text('Invalid number'),
+                                content: Text('Number must be positive.'),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: Text('OK'),
+                                    onPressed: () => Navigator.of(context).pop(0),
+                                  ),
+                                ],
+                              );
+                            });
+                        } else {
+                          _result = GetDivisors(_num);
+                        }
                         break;
                       case 3:
-                        _result = PrimeFactorization(_num);
+                        if(_num < 1) {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (_) {
+                              return AlertDialog(
+                                title: Text('Invalid number'),
+                                content: Text('Number must be positive.'),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: Text('OK'),
+                                    onPressed: () => Navigator.of(context).pop(0),
+                                  ),
+                                ],
+                              );
+                            });
+                        } else {
+                          _result = PrimeFactorization(_num);
+                        }
                         break;
                       case 4:
-                        _result = GetFactorial(_num);
+                        if(_num > 20) {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (_) {
+                              return AlertDialog(
+                                title: Text('Number too large'),
+                                content: Text('Number must be 20 or less.'),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: Text('OK'),
+                                    onPressed: () => Navigator.of(context).pop(0),
+                                  ),
+                                ],
+                              );
+                            });
+                        } else {
+                          _result = GetFactorial(_num);
+                        }
                         break;
                       default:
                         // do nothing
@@ -307,10 +379,46 @@ class _TabPageState extends State<TabPage> {
                   setState(() {
                     switch(_gValue1) {
                       case 11:
-                        _result = GetGCD(_num, _num2, 0);
+                        if(_num < 1 || _num2 < 1) {
+                          showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (_) {
+                                return AlertDialog(
+                                  title: Text('Invalid number'),
+                                  content: Text('Number must be positive.'),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text('OK'),
+                                      onPressed: () => Navigator.of(context).pop(0),
+                                    ),
+                                  ],
+                                );
+                              });
+                        } else {
+                          _result = GetGCD(_num, _num2, 0);
+                        }
                         break;
                       case 12:
-                        _result = GetLCM(_num, _num2, 0);
+                        if(_num < 1 || _num2 < 1) {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (_) {
+                              return AlertDialog(
+                                title: Text('Invalid number'),
+                                content: Text('Number must be positive.'),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: Text('OK'),
+                                    onPressed: () => Navigator.of(context).pop(0),
+                                  ),
+                                ],
+                              );
+                            });
+                        } else {
+                          _result = GetLCM(_num, _num2, 0);
+                        }
                         break;
                       default:
                       // do nothing
@@ -403,10 +511,46 @@ class _TabPageState extends State<TabPage> {
                   setState(() {
                     switch(_gValue2) {
                       case 21:
-                        _result = GetGCD(_num, _num2, _num3);
+                        if(_num < 1 || _num2 < 1 || _num3 < 1) {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (_) {
+                              return AlertDialog(
+                                title: Text('Invalid number'),
+                                content: Text('Number must be positive.'),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: Text('OK'),
+                                    onPressed: () => Navigator.of(context).pop(0),
+                                  ),
+                                ],
+                              );
+                            });
+                        } else {
+                          _result = GetGCD(_num, _num2, _num3);
+                        }
                         break;
                       case 22:
-                        _result = GetLCM(_num, _num2, _num3);
+                        if(_num < 1 || _num2 < 1 || _num3 < 1) {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (_) {
+                              return AlertDialog(
+                                title: Text('Invalid number'),
+                                content: Text('Number must be positive.'),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: Text('OK'),
+                                    onPressed: () => Navigator.of(context).pop(0),
+                                  ),
+                                ],
+                              );
+                            });
+                        } else {
+                          _result = GetLCM(_num, _num2, _num3);
+                        }
                         break;
                       default:
                       // do nothing
