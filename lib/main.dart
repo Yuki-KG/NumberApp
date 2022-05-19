@@ -207,6 +207,12 @@ class _TabPageState extends State<TabPage> {
                       groupValue: _gValue,
                       onChanged: (value) => _onRadioSelected(value),
                     ),
+                    RadioListTile(
+                      title: Text('Calculate the harmonic number of this'),
+                      value: 5,
+                      groupValue: _gValue,
+                      onChanged: (value) => _onRadioSelected(value),
+                    ),
                   ],
                 ),
               ),
@@ -296,6 +302,27 @@ class _TabPageState extends State<TabPage> {
                             });
                         } else {
                           _result = GetFactorial(_num);
+                        }
+                        break;
+                      case 5:
+                        if(_num < 1) {
+                          showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (_) {
+                                return AlertDialog(
+                                  title: Text('Invalid number'),
+                                  content: Text('Number must be positive.'),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child: Text('OK'),
+                                      onPressed: () => Navigator.of(context).pop(0),
+                                    ),
+                                  ],
+                                );
+                              });
+                        } else {
+                          _result = getHarmonicNumber(_num);
                         }
                         break;
                       default:
@@ -661,6 +688,18 @@ String GetFactorial(int n) {
     val *= i;
   }
   str = "$n! = $val";
+  return(str);
+}
+
+String getHarmonicNumber(int n) {
+  String str = '';
+  int i;
+  double val = 0.0;
+
+  for(i = 1; i <= n; i++) {
+    val += 1/i;
+  }
+  str = "1 + 1/2 + . . . + 1/$n = $val";
   return(str);
 }
 
